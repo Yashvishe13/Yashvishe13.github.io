@@ -7,7 +7,7 @@ link: https://yashvishe13.github.io/
 ## Features 📋
 • Fully Responsive\
 • Valid HTML5 & CSS3\
-• Easy to modify\
+• Easy to modify
 
 ## Installation & Deployment 📦
 - Clone the repository and modify the content of <b>index.html</b> 
@@ -21,7 +21,7 @@ link: https://yashvishe13.github.io/
 ✔ About\
 ✔ Resume\
 ✔ Portfolio\
-✔ Contact \
+✔ Contact
 
 
 
