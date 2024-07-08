@@ -23,7 +23,11 @@ link: https://yashvishe13.github.io/
 ✔ Portfolio\
 ✔ Contact
 
-
+## Things to edit 📄
+✔ Resume\
+✔ Experience\
+✔ Projects\
+✔ Skills
 
 ## Tools Used 🛠️
 * <b>GitHub Pages</b> - To host my static website (HTML, CSS, JS).
