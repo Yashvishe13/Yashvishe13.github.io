@@ -67,18 +67,18 @@
 </nav>
 
 <main class="page page-article">
-  <a class="article-back" href="/blogs/">← blogs</a>
-  <article class="clipboard article">
-    <span class="clip" aria-hidden="true"></span>
-    <div class="paper">
+  <div class="whiteboard">
+    <a class="article-back" href="/blogs/">← blogs</a>
+    <article class="sticky-note article-note">
+      <span class="tack" aria-hidden="true"></span>
       <h1 class="article-title">Concerns with compounding on long horizon tasks</h1>
       <p class="article-meta">Sep 11, 2026</p>
       <div class="article-body">
       <p>I think we all know that agents are not that great at solving long horizon tasks to some extent and the major problem is maintaining the policy that they start with also called policy drifting. Lets say you initialize a policy for an agent and then deploy it as a self evolving agent in a production setting, policy entails for first 100 iterations and everything works perfectly, agent encounters a situation and decides to slightly drift away from the policy and maybe it makes sense in that situation, but this is now stored in the memory and the original policy has permanently started a tangent to some extent. Fast forward to iteration 700, tangent has extended to a completely different policy that we originally started with. While in an organizational setting this could result in loss of revenue, but in healthcare sector or finance sector, this could have catastrophic damages.</p>
       <p>We all imagine a future with AGI but I think there’s an in-between step that will happen before AGI starts rolling out and I think it’s an AI model that’s learning from everyone. An agent that learns from everyone also has its policy drifted by everyone. As scary as it sounds, human beings do learn from everyone, what they decide to keep vs what they decide to discard makes them a good or a bad human being and I think the current direction of training is how to incorporate available information but I think it should also take into account how to discard information that is potentially harmful - most of this is handled by guardrails today, which is just a single line of defense and if these models keep breaking out of sandboxes, I don’t how long will it take for them to breakout of guardrails. Maybe we should start thinking about this</p>
       </div>
-    </div>
-  </article>
+    </article>
+  </div>
 </main>
 
 <footer class="footer">
