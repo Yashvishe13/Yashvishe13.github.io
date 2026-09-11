@@ -497,15 +497,80 @@ a.sticky-note:focus-visible {
 }
 .article-back:hover { color: var(--c-paper-accent); text-decoration: none; }
 
-.article-note {
+.post-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  isolation: isolate;
+}
+.post-bg {
+  position: absolute;
+  inset: 12px 8px 24px;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.post-stage .whiteboard.is-backdrop {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  filter: blur(18px);
+  transform: scale(1.03);
+}
+.board-dim {
+  position: absolute;
+  inset: -20px;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(0, 0, 0, .42), rgba(0, 0, 0, .78) 72%);
+}
+.post-stage .article-back {
   position: relative;
   top: auto;
   right: auto;
-  margin: 56px auto 40px 28px;
-  width: min(560px, calc(100% - 48px));
-  padding: 40px 36px 44px;
-  transform: rotate(-1.2deg);
+  left: auto;
+  z-index: 2;
+  align-self: flex-start;
+  margin: 4px 0 20px 8px;
+  color: rgba(236, 228, 212, .78);
 }
+.post-stage .article-back:hover { color: #fff; }
+
+.article-note.is-lifted {
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: 2;
+  margin: 8px auto 56px;
+  width: min(680px, calc(100% - 28px));
+  padding: 48px 44px 52px;
+  transform: rotate(-1.6deg);
+  background-color: var(--c-paper);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .4) inset,
+    0 18px 32px rgba(0, 0, 0, .32),
+    0 48px 90px rgba(0, 0, 0, .55);
+  animation: note-lift .5s ease-out;
+}
+@keyframes note-lift {
+  from {
+    opacity: 0;
+    transform: rotate(-2.4deg) translate(-30%, -22%) scale(.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.6deg) translate(0, 0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .article-note.is-lifted { animation: none; }
+}
+
+.article-note.is-lifted .article-title,
+.article-note.is-lifted .article-meta {
+  padding-left: 0;
+}
+
 .article-title {
   margin: 0;
   padding-left: 18px;
@@ -559,11 +624,11 @@ a.sticky-note:focus-visible {
     left: 16px;
     width: calc(100% - 32px);
   }
-  .article-note {
-    margin: 52px auto 28px 12px;
-    width: calc(100% - 24px);
+  .article-note.is-lifted {
+    margin: 0 auto 32px;
+    width: calc(100% - 8px);
     padding: 32px 22px 28px;
   }
   .article-title { font-size: 30px; }
-  .article-back { top: 14px; right: 14px; left: auto; }
+  .post-stage .article-back { margin: 0 0 16px 4px; }
 }
