@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Yash Vishe</title>
+<meta name="description" content="Projects by Yash Vishe: embodied agents in Minecraft and SimWorld, OpenStreetMap to Unreal Engine city generation, a deep research agent trained with GRPO, music context preservation, and Visper.">
+<meta name="author" content="Yash Vishe">
+<link rel="canonical" href="https://yashvishe13.github.io/projects/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yash Vishe">
+<meta property="og:title" content="Projects — Yash Vishe">
+<meta property="og:description" content="Embodied agents, generated cities, deep research agents, music evaluation and voice-first code understanding.">
+<meta property="og:url" content="https://yashvishe13.github.io/projects/">
+<meta property="og:image" content="https://yashvishe13.github.io/assets/projects/citygen.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects — Yash Vishe">
+<meta name="twitter:description" content="Embodied agents, generated cities, deep research agents, music evaluation and voice-first code understanding.">
+<meta name="twitter:image" content="https://yashvishe13.github.io/assets/projects/citygen.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../projects.css?v=1">
+
+<script>
+(function () {
+  var saved = localStorage.getItem('theme');
+  document.documentElement.setAttribute('data-theme', saved || 'dark');
+})();
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <span>Yash Vishe</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/projects/" class="active" aria-current="page">Projects</a></li>
+        <li><a href="/blogs/">Blogs</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color mode" title="Switch to dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="page projects-page">
+  <header class="projects-head">
+    <h1>Projects</h1>
+    <p>Things I have built around agents that act in worlds, generate them, or learn from them. Hover a card to watch it (on a phone, just scroll).</p>
+  </header>
+
+  <div class="work-grid" id="work-grid"></div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 Yash Vishe. Built with plain HTML and CSS, hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.</p>
+  <p class="footer-keywords">Research interests: world models · continual learning · reinforcement learning · self-evolving agents · LLM agents · agent skill evolution · procedural memory · generative environments · multimodal reasoning · musical intelligence</p>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('themeToggle');
+  apply(document.documentElement.getAttribute('data-theme') || 'dark');
+  btn.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+    localStorage.setItem('theme', next);
+  });
+  function apply(mode) {
+    document.documentElement.setAttribute('data-theme', mode);
+    btn.setAttribute('aria-pressed', mode === 'dark');
+    btn.title = mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  }
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- edit projects here -------------------------------------------
+  // media: base path under /assets/projects/ (expects NAME.mp4 + NAME.jpg).
+  // Leave media out to show the "coming soon" tile instead.
+  var PROJECTS = [
+    {
+      title: 'CivilizationCraft',
+      tags: ['Embodied agents', 'Continual learning'],
+      desc: 'An embodied AI agent sets out to beat Minecraft from scratch. It keeps what worked and what failed, so every new attempt starts a little smarter than the last.',
+      soon: 'Film in the making'
+    },
+    {
+      title: 'SimWorld',
+      href: 'https://simworld.org/',
+      tags: ['Q-Lab, UC San Diego', 'Unreal Engine'],
+      desc: 'Tasks for embodied LLM agents inside a photoreal Unreal Engine city. They hunt for items, drive through checkpoints and play tag against each other, with their reasoning shown beside every move.',
+      media: 'simworld',
+      links: [['Website', 'https://simworld.org/']]
+    },
+    {
+      title: 'CityGen: OpenStreetMap → Unreal Engine 5.7',
+      href: 'https://yashvishe13.github.io/citygen-report/',
+      tags: ['Coding agents', 'UE 5.7 PCG'],
+      desc: 'Rebuilds a real district of Midtown Manhattan in Unreal Engine from OpenStreetMap. A coding agent measures the area first, then writes a translator fitted to it, so every triangle traces back to an OSM element.',
+      media: 'citygen',
+      links: [['Report', 'https://yashvishe13.github.io/citygen-report/'], ['Code', 'https://github.com/Yashvishe13/city_generation']]
+    },
+    {
+      title: 'Deep Research Agent',
+      href: 'https://github.com/Yashvishe13/deep-research',
+      tags: ['Agents', 'GRPO'],
+      desc: 'Plans, searches the live web, reflects and rewrites its plan, then writes a fully cited report and checks each citation against its source. Training the plan policy with online GRPO lifts the RACE score from 0.425 to 0.472.',
+      media: 'deep-research',
+      links: [['Code', 'https://github.com/Yashvishe13/deep-research']]
+    },
+    {
+      title: 'Music Context Preservation',
+      href: 'https://musecpeval-demo.netlify.app/',
+      tags: ['ISMIR 2026', 'Music evaluation'],
+      desc: 'When an AI edits a song, what survives? A framework that scores harmony, melody, rhythm and structure between the original and the edited audio. Listen to real pairs in the demo.',
+      media: 'music-context',
+      links: [['Demo', 'https://musecpeval-demo.netlify.app/'], ['Paper', 'https://arxiv.org/abs/2512.14629'], ['Code', 'https://github.com/Yashvishe13/music-context-preservation-demo']]
+    },
+    {
+      title: 'Visper: Talk to your code',
+      href: 'https://github.com/abhay-lal/Visper',
+      tags: ['Top 10, Google Gemini Hackathon'],
+      desc: 'Paste a GitHub repo and ask questions about it out loud. Visper answers in real time with Gemini Live, grounded in the code through secure RAG, and can turn the repo into a narrated video walkthrough.',
+      media: 'visper',
+      links: [['Code', 'https://github.com/abhay-lal/Visper']]
+    }
+  ];
+  // -------------------------------------------------------------------
+
+  // Bump when a clip is re-encoded so browsers fetch the new file.
+  var V = '?v=1';
+  var BASE = '/assets/projects/';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CUE = '<span class="cue"><svg width="7" height="8" viewBox="0 0 7 8" fill="currentColor" aria-hidden="true"><path d="M0 0l7 4-7 4z"/></svg>play</span>';
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+  function ext(href) { return /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''; }
+
+  document.getElementById('work-grid').innerHTML = PROJECTS.map(function (p) {
+    var media = p.media
+      ? '<img src="' + BASE + p.media + '.jpg' + V + '" alt="" loading="lazy" decoding="async">' +
+        '<video muted loop playsinline preload="none" aria-hidden="true" data-src="' + BASE + p.media + '.mp4' + V + '"></video>' + CUE
+      : '<span class="thumb-soon"><b>' + esc(p.title) + '</b><span>' + esc(p.soon || 'Coming soon') + '</span></span>';
+    var thumb = p.href
+      ? '<a class="thumb" href="' + p.href + '"' + ext(p.href) + ' aria-label="' + esc(p.title) + '">' + media + '</a>'
+      : '<span class="thumb">' + media + '</span>';
+    var title = p.href
+      ? '<a class="work-title" href="' + p.href + '"' + ext(p.href) + '>' + esc(p.title) + '</a>'
+      : '<span class="work-title">' + esc(p.title) + '</span>';
+    var tags = (p.tags || []).map(function (t) { return '<span class="tag tag-venue">' + esc(t) + '</span>'; }).join('');
+    var links = (p.links || []).map(function (l) {
+      return '<a class="pub-link" href="' + l[1] + '"' + ext(l[1]) + '>' + esc(l[0]) + '</a>';
+    }).join('');
+    return '<article class="work-card">' + thumb +
+      '<div class="work-text">' +
+        (tags ? '<div class="work-tags">' + tags + '</div>' : '') +
+        title +
+        '<p class="work-desc" style="margin:0">' + esc(p.desc) + '</p>' +
+        (links ? '<div class="work-links">' + links + '</div>' : '') +
+      '</div></article>';
+  }).join('');
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+
+  function start(card) {
+    var v = card.querySelector('video');
+    card.classList.add('live');
+    if (!v || reduce) return;
+    if (!v.src) { v.src = v.getAttribute('data-src'); }
+    var pr = v.play();
+    if (pr && pr.catch) pr.catch(function () {});
+  }
+  function stop(card) {
+    var v = card.querySelector('video');
+    card.classList.remove('live');
+    if (!v) return;
+    v.pause();
+    v.classList.remove('playing');
+    try { v.currentTime = 0; } catch (e) {}
+  }
+
+  cards.forEach(function (card) {
+    var v = card.querySelector('video');
+    if (v) v.addEventListener('playing', function () { v.classList.add('playing'); });
+    card.addEventListener('mouseenter', function () { start(card); });
+    card.addEventListener('mouseleave', function () { stop(card); });
+    card.addEventListener('focusin', function () { start(card); });
+    card.addEventListener('focusout', function () { stop(card); });
+  });
+
+  // Touch screens have no hover: play whichever card is mostly in view.
+  if ('IntersectionObserver' in window && !reduce && !window.matchMedia('(hover: hover)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.isIntersecting ? start(e.target) : stop(e.target); });
+    }, { threshold: 0.6 });
+    cards.forEach(function (c) { io.observe(c); });
+  }
+})();
+</script>
+
+</body>
+</html>
