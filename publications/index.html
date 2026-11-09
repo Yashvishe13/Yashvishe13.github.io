@@ -32,6 +32,21 @@
   document.documentElement.setAttribute('data-theme', saved || 'dark');
 })();
 </script>
+<style>
+.pub-card.has-org { display: flex; gap: 18px; align-items: flex-start; }
+.pub-card.has-org .pub-body { flex: 1; min-width: 0; }
+.pub-org {
+  flex: none; width: 64px; height: 64px; border-radius: 14px;
+  display: grid; place-items: center;
+  background: #fff; border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+}
+.pub-org svg { width: 34px; height: 34px; }
+@media (max-width: 520px) {
+  .pub-org { width: 46px; height: 46px; border-radius: 11px; }
+  .pub-org svg { width: 25px; height: 25px; }
+}
+</style>
 </head>
 <body>
 
@@ -61,11 +76,14 @@
         <h3 class="subsection-title">Preprints &amp; Under Review</h3>
         <div class="pub-list">
 
-          <div class="pub-card">
+          <div class="pub-card has-org">
+            <div class="pub-body">
             <div class="pub-tags"><span class="tag tag-venue">WWW 2027</span><span class="tag tag-review">Under review</span></div>
             <div class="pub-title">LUNA: Latent U-Net Activation Steering</div>
             <div class="pub-authors">Abhay Anand*, <strong>Yash Vishe*</strong>, Sheldon Yu, Yiran Jenny Shen, Yu Xia, Xunyi Jiang, Tong Yu, Junda Wu</div>
             <div class="pub-venue">The ACM Web Conference (WWW), 2027</div>
+            </div>
+            <a class="pub-org" href="https://research.adobe.com/" target="_blank" rel="noopener" title="In collaboration with Adobe Research" aria-label="Adobe Research"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FA0F00" d="M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425zM8.884 1.376H0v21.248zm15.116 0h-8.884L24 22.624Z"/></svg></a>
           </div>
 
           <div class="pub-card">
@@ -75,11 +93,14 @@
             <div class="pub-venue">Annual Conference of the Nations of the Americas Chapter of the ACL (NAACL), 2027</div>
           </div>
 
-          <div class="pub-card">
+          <div class="pub-card has-org">
+            <div class="pub-body">
             <div class="pub-tags"><span class="tag tag-venue">ICLR 2027</span><span class="tag tag-review">Under review</span></div>
             <div class="pub-title">Skill-R1: Agent Skill Evolution via Reinforcement Learning</div>
             <div class="pub-authors"><strong>Yash Vishe</strong>, Rohan Surana, Xunyi Jiang, Zihan Huang, Xintong Li, Nikki Lijing Kuang, Tong Yu, Ryan A. Rossi, Jingbo Shang, Julian McAuley, Junda Wu</div>
             <div class="pub-venue">International Conference on Learning Representations (ICLR), 2027</div>
+            </div>
+            <a class="pub-org" href="https://research.adobe.com/" target="_blank" rel="noopener" title="In collaboration with Adobe Research" aria-label="Adobe Research"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FA0F00" d="M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425zM8.884 1.376H0v21.248zm15.116 0h-8.884L24 22.624Z"/></svg></a>
           </div>
 
         </div>
