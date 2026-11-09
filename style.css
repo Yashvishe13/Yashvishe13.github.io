@@ -632,3 +632,12 @@ a.sticky-note:focus-visible {
   .article-title { font-size: 30px; }
   .post-stage .article-back { margin: 0 0 16px 4px; }
 }
+
+/* ---------- compact nav on phones (three tabs + toggle) ---------- */
+@media (max-width: 520px) {
+  .nav-inner { padding: 0 14px; }
+  .nav-logo { white-space: nowrap; font-size: 15.5px; }
+  .nav-right { gap: 6px; }
+  .nav-links { gap: 0; }
+  .nav-links a { padding: 6px 8px; font-size: 14px; }
+}
