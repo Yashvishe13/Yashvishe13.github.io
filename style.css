@@ -363,6 +363,83 @@ a:hover { color: var(--c-accent-dark); text-decoration: underline; }
 :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 /* ---------- blogs / notes ---------- */
+/* Opening a note: the board blurs back, a veil dims it, and the note travels
+   from its corner to the middle of the stage. Where cross-document view
+   transitions run, that is one continuous morph; where they do not, the
+   `.no-vt` fallback near the bottom of this section plays the same beats on
+   load. Both share the timing below so they feel like one animation. */
+.board .nav { view-transition-name: blog-navigation; }
+.board .footer { view-transition-name: blog-footer; }
+.board .whiteboard { view-transition-name: blog-board; }
+.board .board-dim { view-transition-name: blog-dim; }
+.board .sticky-note { view-transition-name: blog-paper; }
+
+::view-transition-group(blog-board) { z-index: 0; }
+::view-transition-group(blog-dim) { z-index: 1; }
+::view-transition-group(blog-paper) { z-index: 3; }
+::view-transition-group(blog-navigation),
+::view-transition-group(blog-footer) { z-index: 4; }
+
+/* One clock for every layer, so nothing finishes early and hitches. */
+::view-transition-group(blog-board),
+::view-transition-group(blog-dim),
+::view-transition-group(blog-paper),
+::view-transition-group(root) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(.22, .68, .16, 1);
+}
+::view-transition-old(blog-board),
+::view-transition-new(blog-board),
+::view-transition-old(blog-dim),
+::view-transition-new(blog-dim),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 460ms;
+  animation-timing-function: ease-out;
+}
+
+/* The board is the same picture on both pages, sharp versus blurred, so the
+   straight crossfade reads as a focus pull rather than a page swap. */
+::view-transition-old(blog-board),
+::view-transition-new(blog-board),
+::view-transition-old(blog-dim),
+::view-transition-new(blog-dim) {
+  height: 100%;
+  object-fit: fill;
+}
+
+/* The note keeps its real text size while the sheet around it grows, so the
+   words never stretch. Pinned top left so the lines do not slide sideways as
+   the sheet widens. */
+::view-transition-image-pair(blog-paper) {
+  isolation: isolate;
+  /* An opaque sheet prevents a flash of the board between text snapshots. */
+  background-color: var(--c-paper);
+}
+::view-transition-old(blog-paper),
+::view-transition-new(blog-paper) {
+  height: 100%;
+  overflow: clip;
+  object-fit: none;
+  object-position: top left;
+  mix-blend-mode: normal;
+}
+::view-transition-old(blog-paper) {
+  animation: paper-text-out 240ms ease-in both;
+}
+::view-transition-new(blog-paper) {
+  animation: paper-text-in 300ms 160ms ease-out both;
+}
+
+@keyframes paper-text-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes paper-text-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -424,6 +501,20 @@ body.board {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, .4) inset,
     0 10px 24px rgba(40, 24, 12, .18);
+  transform-origin: 50% 12%;
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  a.sticky-note:hover {
+    transform: translateY(-4px) rotate(-1.8deg);
+    box-shadow: 0 18px 30px rgba(40, 24, 12, .26);
+  }
+  /* Settle back before the snapshot is taken, so the note does not start the
+     transition from a lifted, half-straightened pose. */
+  a.sticky-note:active {
+    transform: rotate(-2.4deg);
+    transition-duration: 90ms;
+  }
 }
 a.sticky-note:hover {
   color: var(--c-paper-ink);
@@ -544,26 +635,54 @@ a.sticky-note:focus-visible {
   margin: 8px auto 56px;
   width: min(680px, calc(100% - 28px));
   padding: 48px 44px 52px;
-  transform: rotate(-1.6deg);
+  transform: none;
   background-color: var(--c-paper);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, .4) inset,
     0 18px 32px rgba(0, 0, 0, .32),
     0 48px 90px rgba(0, 0, 0, .55);
-  animation: note-lift .5s ease-out;
 }
-@keyframes note-lift {
+/* Fallback for browsers that never ran the morph: play the same beats on load
+   so the article still opens rather than appearing in one hard cut. The veil
+   dims first, the sheet rises into it a beat later. */
+@media (prefers-reduced-motion: no-preference) {
+  .no-vt .post-stage .board-dim {
+    animation: veil-in 460ms cubic-bezier(.22, .68, .16, 1) both;
+  }
+  .no-vt .article-note.is-lifted {
+    animation: note-open 480ms 90ms cubic-bezier(.22, .68, .16, 1) both;
+  }
+  .no-vt .post-stage .article-back {
+    animation: back-in 380ms 220ms ease-out both;
+  }
+}
+
+@keyframes veil-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes note-open {
   from {
     opacity: 0;
-    transform: rotate(-2.4deg) translate(-30%, -22%) scale(.9);
+    transform: translateY(16px) scale(.975) rotate(-1.1deg);
   }
   to {
     opacity: 1;
-    transform: rotate(-1.6deg) translate(0, 0) scale(1);
+    transform: translateY(0) scale(1) rotate(0deg);
   }
 }
+@keyframes back-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .article-note.is-lifted { animation: none; }
+  @view-transition { navigation: none; }
+  .sticky-note { transition: none; }
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
 }
 
 .article-note.is-lifted .article-title,

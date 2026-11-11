@@ -24,7 +24,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=lift2">
+<link rel="stylesheet" href="../style.css?v=lift3">
+
+<style>
+@view-transition { navigation: auto; }
+</style>
+
+<script>
+/* Cross-document view transitions are unavailable in some browsers and get
+   skipped when the incoming document is slow to first paint. Mark the document
+   so the stylesheet can fall back to a plain entry animation instead of
+   swapping in with no motion at all. */
+(function () {
+  var root = document.documentElement;
+  root.classList.add('no-vt');
+  if (!('onpagereveal' in window)) return;
+  addEventListener('pagereveal', function (e) {
+    if (e.viewTransition) root.classList.remove('no-vt');
+  });
+})();
+</script>
 
 <script>
 (function () {
